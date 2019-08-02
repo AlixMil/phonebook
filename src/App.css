@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+/* .app {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+} */
+
+.app-wrapper {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  /* display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center; */
+}
+
+.listgroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
