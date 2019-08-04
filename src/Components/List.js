@@ -3,6 +3,7 @@ import { ListGroup, Dropdown } from 'react-bootstrap';
 import '../App.css';
 
 export default function List(props) {
+	
 	return (<ListGroup>
 		{props.data.map(item => {
 			return (
@@ -19,8 +20,8 @@ export default function List(props) {
 							<Dropdown.Item>
 								Remove
 							</Dropdown.Item>
-							<Dropdown.Item>
-								Delete Forever
+							<Dropdown.Item onClick={() => props.handleDelete(item.id)}>
+								Delete
 							</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>
