@@ -12,21 +12,50 @@ function App() {
     <span className="sr-only">Loading...</span>
   </Spinner>)
 
+  const handleConsole = () => {
+    console.log('test')
+  }
+
+  const handleDelete = (id) => {
+    setList(prevList => {
+      prevList.splice(id, 1)
+      const reload = prevList;
+      return [...reload];
+    })
+  }
+
+  const handleAdd = (name, surName, num) => {
+    setList(prevList => {
+      const newObj2 = prevList.slice(0);
+      const plus = ++newObj2.id;
+      const newObj = {
+        number: num,
+        name: name,
+        surName: surName,
+        id: plus
+      }
+      return [...prevList, newObj]
+    })
+  }
+
   const [list, setList] = useState([
     {
       number: 89771337004,
       name: "Alex",
-      surName: "Mil"
-  },
+      surName: "Mil",
+      id: 0
+    },
     {
       number: 89165341923,
       name: "Lara",
-      surName: "Cantin"
+      surName: "Cantin",
+      id: 1
     },
     {
       number: 89534425392,
       name: "Larsen",
-      surName: "Iven"
+      surName: "Iven",
+      id: 2
     }
   ]);
 
@@ -35,8 +64,8 @@ function App() {
         <NavigationBar />
         <div className="app-wrapper">
           <h2>Your PhoneBook!</h2>
-          <InsertContact />
-          <List data={list} />
+          <InsertContact handleAdd={handleAdd} handleConsole={handleConsole} />
+          <List handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
         </div>
     </div>
   );
