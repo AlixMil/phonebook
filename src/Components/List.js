@@ -7,7 +7,7 @@ export default function List(props) {
 	return (<ListGroup>
 		{props.data.map(item => {
 			return (
-				<ListGroup.Item className="listgroup">
+				<ListGroup.Item key={item.id} className="listgroup">
 					{`${item.name} ${item.surName}: ${item.number}`}
 					<Dropdown>
 						<Dropdown.Toggle variant='danger'>

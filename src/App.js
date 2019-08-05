@@ -8,12 +8,12 @@ import './App.css';
 
 
 function App() {
-  const loading = (<Spinner animaton="border" role="status">
-    <span className="sr-only">Loading...</span>
-  </Spinner>)
+  // const loading = (<Spinner animaton="border" role="status">
+  //   <span className="sr-only">Loading...</span>
+  // </Spinner>)
 
-  const handleConsole = () => {
-    console.log('test')
+  const handleConsole = (el) => {
+    console.log(el);
   }
 
   const handleDelete = (id) => {
@@ -24,18 +24,32 @@ function App() {
     })
   }
 
+  const valideInputs = (name, surName, num) => {
+    // if(name !== '') {
+    //   return name
+    // } else {
+    //   return null
+    // }
+  }
+
   const handleAdd = (name, surName, num) => {
-    setList(prevList => {
-      const newObj2 = prevList.slice(0);
-      const plus = ++newObj2.id;
-      const newObj = {
-        number: num,
-        name: name,
-        surName: surName,
-        id: plus
+    if (name !== '') {
+      if (surName !== '') {
+        if (num !== '') {
+          setList(prevList => {
+            const newArr = prevList.slice(0); // this not success logic
+            let plus = newArr.pop().id;
+            const newObj = {
+              number: num,
+              name: name,
+              surName: surName,
+              id: ++plus
+            }
+            return [...prevList, newObj]
+          })
+        }
       }
-      return [...prevList, newObj]
-    })
+    }
   }
 
   const [list, setList] = useState([
