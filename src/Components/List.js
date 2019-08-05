@@ -1,30 +1,15 @@
 import React from 'react';
-import { ListGroup, Dropdown } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 import '../App.css';
 
 export default function List(props) {
 	
 	return (<ListGroup>
-		{props.data.map(item => {
+		{props.data.map((item, index) => {
 			return (
-				<ListGroup.Item key={item.id} className="listgroup">
+				<ListGroup.Item key={index} className="listgroup">
 					{`${item.name} ${item.surName}: ${item.number}`}
-					<Dropdown>
-						<Dropdown.Toggle variant='danger'>
-							Delete
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Header>
-								Remove just replace your contant in wastebin
-							</Dropdown.Header>
-							<Dropdown.Item>
-								Remove
-							</Dropdown.Item>
-							<Dropdown.Item onClick={() => props.handleDelete(item.id)}>
-								Delete
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
+					<Button onClick={() => props.handleDelete(index)} variant="danger">Delete</Button>
 				</ListGroup.Item>
 				)
 		})}

@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
 import InsertContact from './Components/InsertContact.js';
 import List from './Components/List.js';
-// import Search from './Components/Search.js';
 import NavigationBar from './Components/NavigationBar.js';
 import './App.css';
 
 
 function App() {
-  // const loading = (<Spinner animaton="border" role="status">
-  //   <span className="sr-only">Loading...</span>
-  // </Spinner>)
+  const [list, setList] = useState([
+    {
+      number: 89771337004,
+      name: "Alex",
+      surName: "Mil"
+    },
+    {
+      number: 89165341923,
+      name: "Lara",
+      surName: "Cantin"
+    },
+    {
+      number: 89534425392,
+      name: "Larsen",
+      surName: "Iven"
+    }
+  ]);
 
   const handleConsole = (el) => {
     console.log(el);
@@ -24,62 +36,70 @@ function App() {
     })
   }
 
-  const valideInputs = (name, surName, num) => {
-    // if(name !== '') {
-    //   return name
-    // } else {
-    //   return null
-    // }
-  }
-
   const handleAdd = (name, surName, num) => {
     if (name !== '') {
       if (surName !== '') {
         if (num !== '') {
-          setList(prevList => {
-            const newArr = prevList.slice(0); // this not success logic
-            let plus = newArr.pop().id;
-            const newObj = {
-              number: num,
-              name: name,
-              surName: surName,
-              id: ++plus
-            }
-            return [...prevList, newObj]
+          setList(prevList => { // this not success logic
+              const newObj = {  
+                number: num,
+                name: name,
+                surName: surName,
+              }
+              return [...prevList, newObj]
           })
         }
       }
     }
   }
 
-  const [list, setList] = useState([
-    {
-      number: 89771337004,
-      name: "Alex",
-      surName: "Mil",
-      id: 0
-    },
-    {
-      number: 89165341923,
-      name: "Lara",
-      surName: "Cantin",
-      id: 1
-    },
-    {
-      number: 89534425392,
-      name: "Larsen",
-      surName: "Iven",
-      id: 2
-    }
-  ]);
+  const handleLoad = () => {
+    setList(prevList => {
+      const newList = [
+        {
+          number: 89771442244,
+          name: "Jonathan",
+          surName: "Clue"
+        },
+        {
+          number: 89742632244,
+          name: "Jonh",
+          surName: "Blue"
+        },
+        {
+          number: 89859162244,
+          name: "Kenie",
+          surName: "West"
+        },
+        {
+          number: 82445816512,
+          name: "Sonny",
+          surName: "Moore"
+        },
+        {
+          number: 89159112294,
+          name: "DJ",
+          surName: "Snake"
+        }
+      ]
+      return [...prevList, ...newList]
+    })
+  }
+
+  // const handleSearch = (value) => {
+  //   for (let i = 0; i <= list.length; i++) {
+  //     if (list[i].name.indexOf )
+  //   }
+  // }
 
   return (
     <div className="app">
-        <NavigationBar />
+        <NavigationBar /* handleSearch={handleSearch} */ />
         <div className="app-wrapper">
           <h2>Your PhoneBook!</h2>
           <InsertContact handleAdd={handleAdd} handleConsole={handleConsole} />
           <List handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
+          <button onClick={handleLoad}>Load</button>
         </div>
     </div>
   );
