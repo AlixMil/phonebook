@@ -53,39 +53,6 @@ function App() {
     }
   }
 
-  const handleLoad = () => {
-    setList(prevList => {
-      const newList = [
-        {
-          number: 89771442244,
-          name: "Jonathan",
-          surName: "Clue"
-        },
-        {
-          number: 89742632244,
-          name: "Jonh",
-          surName: "Blue"
-        },
-        {
-          number: 89859162244,
-          name: "Kenie",
-          surName: "West"
-        },
-        {
-          number: 82445816512,
-          name: "Sonny",
-          surName: "Moore"
-        },
-        {
-          number: 89159112294,
-          name: "DJ",
-          surName: "Snake"
-        }
-      ]
-      return [...prevList, ...newList]
-    })
-  }
-
   // const handleSearch = (value) => {
   //   for (let i = 0; i <= list.length; i++) {
   //     if (list[i].name.indexOf )
@@ -96,10 +63,9 @@ function App() {
     <div className="app">
         <NavigationBar /* handleSearch={handleSearch} */ />
         <div className="app-wrapper">
-          <h2>Your PhoneBook!</h2>
-          <InsertContact handleAdd={handleAdd} handleConsole={handleConsole} />
-          <List handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
-          <button onClick={handleLoad}>Load</button>
+          {/* <h2>Your PhoneBook!</h2> */}
+          <List className="modal-list" handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
+          <InsertContact className="insert-block" handleAdd={handleAdd} handleConsole={handleConsole} />
         </div>
     </div>
   );

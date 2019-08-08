@@ -33,3 +33,21 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.forms {
+  margin: 6px;
+  width: 90%;
+}
+
+.userimg {
+  width: 130px;
+  height: 130px;
+}
+
+.btn-add {
+  width: 100%;
+}
+
+.accordion-toggle {
+  margin: 4px;
+}
