@@ -3,24 +3,27 @@ import InsertContact from './Components/InsertContact.js';
 import List from './Components/List.js';
 import NavigationBar from './Components/NavigationBar.js';
 import './App.css';
-
+import defImg from './IMG/user.png';
 
 function App() {
   const [list, setList] = useState([
     {
       number: 89771337004,
       name: "Alex",
-      surName: "Mil"
+      surName: "Mil",
+      img: defImg
     },
     {
       number: 89165341923,
       name: "Lara",
-      surName: "Cantin"
+      surName: "Cantin",
+      img: defImg
     },
     {
       number: 89534425392,
       name: "Larsen",
-      surName: "Iven"
+      surName: "Iven",
+      img: defImg
     }
   ]);
 
@@ -36,17 +39,18 @@ function App() {
     })
   }
 
-  const handleAdd = (name, surName, num) => {
+  const handleAdd = (name, surName, num, img) => {
     if (name !== '') {
       if (surName !== '') {
         if (num !== '') {
           setList(prevList => { // this not success logic
-              const newObj = {  
-                number: num,
-                name: name,
-                surName: surName,
-              }
-              return [...prevList, newObj]
+            const newObj = {
+              number: num,
+              name: name,
+              surName: surName,
+              img: img || defImg
+            }
+            return [...prevList, newObj]
           })
         }
       }
@@ -61,12 +65,12 @@ function App() {
 
   return (
     <div className="app">
-        <NavigationBar /* handleSearch={handleSearch} */ />
-        <div className="app-wrapper">
-          {/* <h2>Your PhoneBook!</h2> */}
-          <List className="modal-list" handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
-          <InsertContact className="insert-block" handleAdd={handleAdd} handleConsole={handleConsole} />
-        </div>
+      <NavigationBar /* handleSearch={handleSearch} */ />
+      <div className="app-wrapper">
+        {/* <h2>Your PhoneBook!</h2> */}
+        <List className="modal-list" handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
+        <InsertContact className="insert-block" handleAdd={handleAdd} handleConsole={handleConsole} />
+      </div>
     </div>
   );
 }
