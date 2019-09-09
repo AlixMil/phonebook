@@ -11,7 +11,7 @@ export default function NavigationBar(props) {
         <Nav.Link href="https://github.com/AlixMil/phonebook">GitHub</Nav.Link>
       </Nav>
       <Form inline>
-        <FormControl ref={searchLine} type="text" placeholder="search" className="mr-sm-2" onChange={() => props.handleSearch(searchLine.current.value)} />
+        <FormControl ref={searchLine} type="text" placeholder="search" className="mr-sm-2" onChange={() => props.handleSearch(props.data, searchLine.current.value)} />
         <Button variant="outline-light">Search</Button>
       </Form>
     </Navbar>
