@@ -27,6 +27,14 @@ function App() {
     }
   ]);
 
+  const filterContacts = (searchTerm) => {
+    if (searchTerm !== '') {
+      setList(list.filter(contact => contact.name.includes(searchTerm)))
+    } else {
+      setList(list)
+    }
+  }
+
   const handleConsole = (el) => {
     console.log(el);
   }
@@ -48,7 +56,7 @@ function App() {
               number: num,
               name: name,
               surName: surName,
-              img: img || defImg
+              img: defImg
             }
             return [...prevList, newObj]
           })
@@ -65,10 +73,10 @@ function App() {
 
   return (
     <div className="app">
-      <NavigationBar /* handleSearch={handleSearch} */ />
+      <NavigationBar data={list} handleSearch={filterContacts} />
       <div className="app-wrapper">
         {/* <h2>Your PhoneBook!</h2> */}
-        <List className="modal-list" handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
+        <List className="modal-list" handleSearch={filterContacts} handleDelete={handleDelete} handleConsole={handleConsole} data={list} />
         <InsertContact className="insert-block" handleAdd={handleAdd} handleConsole={handleConsole} />
       </div>
     </div>

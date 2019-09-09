@@ -46,7 +46,7 @@ export default function InsertContact(props) {
             Close
           </Button>
           <Button variant="primary" onClick={() => {
-            props.handleAdd(inputEl1.current.value, inputEl2.current.value, inputEl3.current.value, fileRef.current.files[0]);
+            props.handleAdd(inputEl1.current.value, inputEl2.current.value, inputEl3.current.value, fileRef.current.files);
             handleClose();
           }}>
             Add Contact
