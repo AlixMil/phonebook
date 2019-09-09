@@ -34,15 +34,14 @@ export default class App extends React.Component {
   }
 
   filterContacts = (contacts, searchTerm) => {
-    this.setState(contacts.filter(contact => contact.name.includes(searchTerm)))
+    this.setState({ filteredContacts: contacts.filter(contact => contact.name.includes(searchTerm)) })
   }
 
   handleDelete = (id) => {
-    this.setState(prevList => {
-      prevList.splice(id, 1)
-      const reload = prevList;
-      return [...reload];
-    })
+    this.setState(prevList => ({
+      // const newList = prevList.contacts.splice(id, 1);
+      contacts: [...prevList.contacts]
+    }))
   }
 
   handleAdd = (name, surName, num, img) => {
@@ -66,10 +65,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <NavigationBar data={this.state} handleSearch={this.filterContacts} />
+        <NavigationBar data={this.state.contacts} handleSearch={this.filterContacts} />
         <div className="app-wrapper">
           {/* <h2>Your PhoneBook!</h2> */}
-          <List className="modal-list" handleDelete={this.handleDelete} data={this.state} />
+          <List className="modal-list" handleDelete={this.handleDelete} data={this.state.contacts} />
           <InsertContact className="insert-block" handleAdd={this.handleAdd} />
         </div>
       </div>
