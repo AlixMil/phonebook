@@ -33,86 +33,47 @@ export default class App extends React.Component {
     }
   }
 
-  filterContacts = (contacts, searchTerm) => {
-    this.setState({ filteredContacts: contacts.filter(contact => contact.name.includes(searchTerm)) })
+  handleSearch = (contacts, searchTerm) => {
+    let copy = contacts.slice(0)
+
+    this.setState({ filteredContacts: copy.filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
+  }
+
+  componentDidMount() {
+    this.handleSearch(this.state.contacts, '')
   }
 
   handleDelete = (id) => {
-    this.setState(prevList => ({
-      // const newList = prevList.contacts.splice(id, 1);
-      contacts: [...prevList.contacts]
-    }))
+
+    this.setState(prevList => {
+      const res = prevList.filteredContacts.filter((e, i) => i != id)
+      return {filteredContacts: res}
+    })
   }
 
   handleAdd = (name, surName, num, img) => {
-    if (name !== '') {
-      if (surName !== '') {
-        if (num !== '') {
-          this.setState(prevList => { // this not success logic
+    if (name && surName && num) {
+          this.setState(state => {
             const newObj = {
               number: num,
               name: name,
               surName: surName,
               img: defImg
             }
-            return [...prevList, newObj]
+            return state.filteredContacts.push(newObj)
           })
-        }
-      }
     }
   }
 
   render() {
     return (
       <div className="app">
-        <NavigationBar data={this.state.contacts} handleSearch={this.filterContacts} />
+        <NavigationBar data={this.state.contacts} handleSearch={this.handleSearch} />
         <div className="app-wrapper">
-          {/* <h2>Your PhoneBook!</h2> */}
-          <List className="modal-list" handleDelete={this.handleDelete} data={this.state.contacts} />
+          <List className="modal-list" handleDelete={this.handleDelete} display={this.state.filteredContacts} data={this.state.contacts} />
           <InsertContact className="insert-block" handleAdd={this.handleAdd} />
         </div>
       </div>
     )
   }
 }
-
-
-
-// function App() {
-//   const [list, setList] = useState([
-//     {
-//       number: 89771337004,
-//       name: "Alex",
-//       surName: "Mil",
-//       img: defImg
-//     },
-//     {
-//       number: 89165341923,
-//       name: "Lara",
-//       surName: "Cantin",
-//       img: defImg
-//     },
-//     {
-//       number: 89534425392,
-//       name: "Larsen",
-//       surName: "Iven",
-//       img: defImg
-//     }
-//   ]);
-// const [anotherList, setAnotherList] = useState();
-
-// const filterContacts = (contacts, searchTerm) => {
-//   setAnotherList(contacts);
-//   if (searchTerm !== '') {
-//     setList(contacts.filter(contact => contact.name.includes(searchTerm)))
-//   } else {
-//     setList(anotherList)
-//   }
-// }
-
-
-// const handleSearch = (value) => {
-//   for (let i = 0; i <= list.length; i++) {
-//     if (list[i].name.indexOf )
-//   }
-// }

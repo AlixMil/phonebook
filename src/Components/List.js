@@ -1,12 +1,12 @@
 import React from 'react';
-import { ListGroup, Button, Row, Col } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 import '../App.css';
 
 export default function List(props) {
 
 	return (
 		<ListGroup>
-			{props.data.map((item, index) => {
+			{props.display.map((item, index) => {
 				return (
 					<ListGroup.Item key={index} className="listgroup">
 						<img className="userimg" src={item.img} alt="user" />
