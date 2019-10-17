@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 import '../App.css';
 
 export default function NavigationBar(props) {
@@ -12,7 +12,6 @@ export default function NavigationBar(props) {
       </Nav>
       <Form inline>
         <FormControl ref={searchLine} type="text" placeholder="search" className="mr-sm-2" onChange={() => props.handleSearch(props.data, searchLine.current.value)} />
-        <Button variant="outline-light">Search</Button>
       </Form>
     </Navbar>
   )

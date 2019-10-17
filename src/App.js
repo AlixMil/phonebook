@@ -29,25 +29,30 @@ export default class App extends React.Component {
           img: defImg
         }
       ],
-      filteredContacts: []
+      memory: []
     }
   }
 
-  handleSearch = (contacts, searchTerm) => {
-    let copy = contacts.slice(0)
-
-    this.setState({ filteredContacts: copy.filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
-  }
-
   componentDidMount() {
-    this.handleSearch(this.state.contacts, '')
+    this.setState({
+      memory: this.state.contacts.slice(0)
+    })
   }
+
+  handleSearch = (contacts, searchTerm) => {
+    if (searchTerm) {
+      this.setState({ contacts: contacts.slice(0).filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
+    } else {
+      this.setState({ contacts: this.state.memory })
+    }
+  }
+
 
   handleDelete = (id) => {
 
     this.setState(prevList => {
-      const res = prevList.filteredContacts.filter((e, i) => i != id)
-      return {filteredContacts: res}
+      const res = prevList.contacts.filter((e, i) => i !== id)
+      return {contacts: res}
     })
   }
 
@@ -60,7 +65,7 @@ export default class App extends React.Component {
               surName: surName,
               img: defImg
             }
-            return state.filteredContacts.push(newObj)
+            return state.contacts.push(newObj)
           })
     }
   }

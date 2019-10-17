@@ -6,7 +6,7 @@ export default function List(props) {
 
 	return (
 		<ListGroup>
-			{props.display.map((item, index) => {
+			{props.data.map((item, index) => {
 				return (
 					<ListGroup.Item key={index} className="listgroup">
 						<img className="userimg" src={item.img} alt="user" />
