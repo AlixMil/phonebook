@@ -33,13 +33,17 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidMount() {
+  reMem = (newState) => {
     this.setState({
-      memory: this.state.contacts.slice(0)
+      memory: newState
     })
   }
 
-  handleSearch = (contacts, searchTerm) => {
+  componentDidMount() {
+    this.reMem(this.state.contacts.slice(0))
+  }
+
+  handleSearch = (contacts, searchTerm) => { // Need Refactoring!!! (Very Bad logic (Forgot memory))
     if (searchTerm) {
       this.setState({ contacts: contacts.slice(0).filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
     } else {
@@ -49,9 +53,9 @@ export default class App extends React.Component {
 
 
   handleDelete = (id) => {
-
     this.setState(prevList => {
       const res = prevList.contacts.filter((e, i) => i !== id)
+      this.reMem(res.slice(0))
       return {contacts: res}
     })
   }
@@ -65,7 +69,9 @@ export default class App extends React.Component {
               surName: surName,
               img: defImg
             }
-            return state.contacts.push(newObj)
+            const res = [...state.contacts, newObj]
+            this.reMem(res)
+            return { contacts: res }
           })
     }
   }
