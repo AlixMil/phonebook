@@ -8,7 +8,7 @@ import defImg from './IMG/user.png';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { // Main idea refactoring this state like a { display: [something information for list display] contacts: [], filteredContacts: [] }
       contacts: [
         {
           number: 89771337004,
@@ -29,25 +29,15 @@ export default class App extends React.Component {
           img: defImg
         }
       ],
-      memory: []
+      filteredContacts: []
     }
-  }
-
-  reMem = (newState) => {
-    this.setState({
-      memory: newState
-    })
-  }
-
-  componentDidMount() {
-    this.reMem(this.state.contacts.slice(0))
   }
 
   handleSearch = (contacts, searchTerm) => { // Need Refactoring!!! (Very Bad logic (Forgot memory))
     if (searchTerm) {
-      this.setState({ contacts: contacts.slice(0).filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
+      this.setState({ filteredContacts: contacts.slice(0).filter(contact => contact.name.includes(searchTerm) || contact.surName.includes(searchTerm)) })
     } else {
-      this.setState({ contacts: this.state.memory })
+      this.setState({ filteredContacts: [] })
     }
   }
 
@@ -55,7 +45,6 @@ export default class App extends React.Component {
   handleDelete = (id) => {
     this.setState(prevList => {
       const res = prevList.contacts.filter((e, i) => i !== id)
-      this.reMem(res.slice(0))
       return {contacts: res}
     })
   }
@@ -70,7 +59,6 @@ export default class App extends React.Component {
               img: defImg
             }
             const res = [...state.contacts, newObj]
-            this.reMem(res)
             return { contacts: res }
           })
     }
@@ -81,7 +69,7 @@ export default class App extends React.Component {
       <div className="app">
         <NavigationBar data={this.state.contacts} handleSearch={this.handleSearch} />
         <div className="app-wrapper">
-          <List className="modal-list" handleDelete={this.handleDelete} display={this.state.filteredContacts} data={this.state.contacts} />
+          <List className="modal-list" handleDelete={this.handleDelete} data={this.state} />
           <InsertContact className="insert-block" handleAdd={this.handleAdd} />
         </div>
       </div>
